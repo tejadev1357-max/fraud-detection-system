@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleEngineService", "servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MlScoringService", "services\MlScoringService\MlScoringService.csproj", "{18B87116-CB70-4B03-8EC1-35461CF10008}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "building-blocks", "building-blocks", "{9B9153F4-BD21-4B39-9121-42A19A07C803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "building-blocks\SharedKernel\SharedKernel.csproj", "{2580D712-B97E-4B43-B684-6C098EEF5E0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +36,15 @@ Global
 		{18B87116-CB70-4B03-8EC1-35461CF10008}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18B87116-CB70-4B03-8EC1-35461CF10008}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18B87116-CB70-4B03-8EC1-35461CF10008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2580D712-B97E-4B43-B684-6C098EEF5E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2580D712-B97E-4B43-B684-6C098EEF5E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2580D712-B97E-4B43-B684-6C098EEF5E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2580D712-B97E-4B43-B684-6C098EEF5E0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0ED512C2-1AAC-4D1B-826D-89AC2373540F} = {08FDB45A-2CD9-40FB-8875-1E4CA1AA3B13}
 		{926FDEBD-EB3A-4578-B147-0290590D1D39} = {08FDB45A-2CD9-40FB-8875-1E4CA1AA3B13}
 		{18B87116-CB70-4B03-8EC1-35461CF10008} = {08FDB45A-2CD9-40FB-8875-1E4CA1AA3B13}
+		{2580D712-B97E-4B43-B684-6C098EEF5E0F} = {9B9153F4-BD21-4B39-9121-42A19A07C803}
 	EndGlobalSection
 EndGlobal
