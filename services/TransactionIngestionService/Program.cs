@@ -6,7 +6,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ITransactionService, TransactionService>();
+var ruleEngineBaseUrl = builder.Configuration.GetValue<string>("RuleEngine:BaseUrl") ?? "http://localhost:5001";
+builder.Services.AddHttpClient<ITransactionService, TransactionService>(client =>
+{
+    client.BaseAddress = new Uri(ruleEngineBaseUrl);
+});
 
 var app = builder.Build();
 
