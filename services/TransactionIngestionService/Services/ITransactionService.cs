@@ -4,5 +4,5 @@ namespace TransactionIngestionService.Services;
 
 public interface ITransactionService
 {
-    TransactionResponse IngestTransaction(CreateTransactionRequest request);
+    Task<TransactionResponse> IngestTransactionAsync(CreateTransactionRequest request);
 }

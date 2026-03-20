@@ -18,9 +18,9 @@ public class TransactionsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(TransactionResponse), StatusCodes.Status202Accepted)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Post([FromBody] CreateTransactionRequest request)
+    public async Task<IActionResult> Post([FromBody] CreateTransactionRequest request)
     {
-        var response = _transactionService.IngestTransaction(request);
+        var response = await _transactionService.IngestTransactionAsync(request);
         return Accepted(response);
     }
 }
