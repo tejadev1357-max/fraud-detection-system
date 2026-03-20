@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionIngestionService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleEngineService", "services\RuleEngineService\RuleEngineService.csproj", "{926FDEBD-EB3A-4578-B147-0290590D1D39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MlScoringService", "services\MlScoringService\MlScoringService.csproj", "{18B87116-CB70-4B03-8EC1-35461CF10008}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{926FDEBD-EB3A-4578-B147-0290590D1D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{926FDEBD-EB3A-4578-B147-0290590D1D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{926FDEBD-EB3A-4578-B147-0290590D1D39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18B87116-CB70-4B03-8EC1-35461CF10008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18B87116-CB70-4B03-8EC1-35461CF10008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18B87116-CB70-4B03-8EC1-35461CF10008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18B87116-CB70-4B03-8EC1-35461CF10008}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0ED512C2-1AAC-4D1B-826D-89AC2373540F} = {08FDB45A-2CD9-40FB-8875-1E4CA1AA3B13}
 		{926FDEBD-EB3A-4578-B147-0290590D1D39} = {08FDB45A-2CD9-40FB-8875-1E4CA1AA3B13}
+		{18B87116-CB70-4B03-8EC1-35461CF10008} = {08FDB45A-2CD9-40FB-8875-1E4CA1AA3B13}
 	EndGlobalSection
 EndGlobal
