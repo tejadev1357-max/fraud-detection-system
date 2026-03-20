@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using RuleEngineService.Models;
 using StackExchange.Redis;
 
@@ -6,6 +7,7 @@ namespace RuleEngineService.Services;
 public class RuleEngineServiceImpl : IRuleEngineService
 {
     private readonly IConnectionMultiplexer _redis;
+    private readonly HttpClient _httpClient;
     private readonly ILogger<RuleEngineServiceImpl> _logger;
     private readonly IConfiguration _configuration;
 
@@ -14,10 +16,12 @@ public class RuleEngineServiceImpl : IRuleEngineService
 
     public RuleEngineServiceImpl(
         IConnectionMultiplexer redis,
+        HttpClient httpClient,
         ILogger<RuleEngineServiceImpl> logger,
         IConfiguration configuration)
     {
         _redis = redis;
+        _httpClient = httpClient;
         _logger = logger;
         _configuration = configuration;
     }
@@ -52,12 +56,52 @@ public class RuleEngineServiceImpl : IRuleEngineService
             _ => "High"
         };
 
+        // If no rules triggered, call ML Scoring Service for additional evaluation
+        MlScoreResult? mlScore = null;
+        if (!isFraudulent)
+        {
+            mlScore = await GetMlScoreAsync(request);
+            if (mlScore != null && mlScore.FraudScore >= 0.7)
+            {
+                isFraudulent = true;
+                riskLevel = "High";
+                triggeredRules.Add($"MlScore: Fraud score {mlScore.FraudScore} exceeds threshold 0.7");
+            }
+        }
+
         return new EvaluateResponse
         {
             IsFraudulent = isFraudulent,
             RiskLevel = riskLevel,
             TriggeredRules = triggeredRules,
-            EvaluatedAt = DateTime.UtcNow
+            EvaluatedAt = DateTime.UtcNow,
+            MlScore = mlScore
         };
+    }
+
+    private async Task<MlScoreResult?> GetMlScoreAsync(EvaluateRequest request)
+    {
+        try
+        {
+            var scoreRequest = new
+            {
+                request.AccountId,
+                request.Amount,
+                request.Currency,
+                request.MerchantName,
+                request.TransactionType,
+                request.SourceIp,
+                request.Location
+            };
+
+            var response = await _httpClient.PostAsJsonAsync("/ml/score", scoreRequest);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<MlScoreResult>();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get ML score for account {AccountId}", request.AccountId);
+            return null;
+        }
     }
 }

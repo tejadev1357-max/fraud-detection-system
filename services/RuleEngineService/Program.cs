@@ -11,7 +11,11 @@ var redisConnectionString = builder.Configuration.GetValue<string>("Redis:Connec
 builder.Services.AddSingleton<IConnectionMultiplexer>(
     ConnectionMultiplexer.Connect(ConfigurationOptions.Parse(redisConnectionString, true)));
 
-builder.Services.AddScoped<IRuleEngineService, RuleEngineServiceImpl>();
+var mlScoringBaseUrl = builder.Configuration.GetValue<string>("MlScoring:BaseUrl") ?? "http://localhost:5002";
+builder.Services.AddHttpClient<IRuleEngineService, RuleEngineServiceImpl>(client =>
+{
+    client.BaseAddress = new Uri(mlScoringBaseUrl);
+});
 
 var app = builder.Build();
 

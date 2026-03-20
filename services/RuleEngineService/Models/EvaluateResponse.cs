@@ -6,4 +6,5 @@ public class EvaluateResponse
     public string RiskLevel { get; set; } = "Low";
     public List<string> TriggeredRules { get; set; } = new();
     public DateTime EvaluatedAt { get; set; }
+    public MlScoreResult? MlScore { get; set; }
 }
